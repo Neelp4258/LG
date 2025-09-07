@@ -102,10 +102,11 @@ body {
     font-weight: 500;
     position: relative;
     padding: 0.5rem 1rem !important;
+    color: white !important;
 }
 
 .nav-link:hover {
-    color: var(--lg-red) !important;
+    opacity: 0.8;
 }
 
 .nav-link::after {
