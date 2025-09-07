@@ -1,16 +1,6 @@
 // Main JavaScript for Jyoti Electron Website
 
-// Initialize cart from localStorage or empty array
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let currentPage = 'home';
-
-// Update cart badge
-const updateCartBadge = () => {
-    const cartCount = document.getElementById('cartCount');
-    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-};
-
-// Product Data with Enhanced Information
+// Product Data
 const products = [
     {
         id: 1,
@@ -27,7 +17,156 @@ const products = [
             "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&h=400&fit=crop",
             "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=600&h=400&fit=crop"
         ],
-        description: "Experience cinematic excellence with LG OLED's self-lit pixels delivering perfect black and infinite contrast. Every scene comes alive with stunning detail and vibrant colors.",
+        description: "Experience cinematic excellence with LG OLED's self-lit pixels delivering perfect black and infinite contrast.",
+        features: [
+            "Self-Lit OLED Pixels",
+            "4K Resolution",
+            "AI-Powered Processing",
+            "Dolby Vision IQ",
+            "Dolby Atmos",
+            "HDMI 2.1 Gaming Features"
+        ],
+        specifications: {
+            "Screen Size": "55 inches",
+            "Resolution": "4K Ultra HD",
+            "Display": "OLED",
+            "HDR": "Dolby Vision IQ, HDR10",
+            "Processor": "α9 Gen6 AI",
+            "Smart TV": "webOS 23",
+            "Gaming Features": "NVIDIA G-SYNC, FreeSync",
+            "Connectivity": "4x HDMI 2.1, 3x USB"
+        },
+        inStock: true,
+        discount: 16,
+        tags: ["oled", "4k", "smart-tv", "gaming"],
+        warranty: "1 Year Standard + 1 Year Panel"
+    },
+    {
+        id: 2,
+        name: "LG 260L Frost Free Refrigerator",
+        price: 28990,
+        originalPrice: 34990,
+        category: "refrigerator",
+        brand: "LG",
+        rating: 4.6,
+        reviews: 189,
+        image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=300&fit=crop",
+        images: [
+            "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&h=400&fit=crop"
+        ],
+        description: "Smart inverter compressor with door cooling+ for efficient cooling and longer freshness.",
+        features: [
+            "Smart Inverter Compressor",
+            "Door Cooling+",
+            "Multi Air Flow",
+            "Auto Smart Connect",
+            "Anti-bacterial Gasket",
+            "Humidity Controller"
+        ],
+        specifications: {
+            "Capacity": "260 Liters",
+            "Type": "Frost Free",
+            "Energy Rating": "3 Star",
+            "Shelves": "Toughened Glass",
+            "Door": "Double Door",
+            "Warranty": "1 Year Product + 10 Years Compressor"
+        },
+        inStock: true,
+        discount: 17,
+        tags: ["refrigerator", "inverter", "frost-free"],
+        warranty: "1 Year Product + 10 Years Compressor"
+    },
+    {
+        id: 3,
+        name: "LG 7kg Front Load Washing Machine",
+        price: 35990,
+        originalPrice: 42990,
+        category: "washing-machine",
+        brand: "LG",
+        rating: 4.7,
+        reviews: 156,
+        image: "https://images.unsplash.com/photo-1558618047-fbd67c35803b?w=400&h=300&fit=crop",
+        images: [
+            "https://images.unsplash.com/photo-1558618047-fbd67c35803b?w=600&h=400&fit=crop",
+            "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=600&h=400&fit=crop"
+        ],
+        description: "Revolutionary washing technology with AI Direct Drive that delivers powerful performance while being gentle on your clothes.",
+        features: [
+            "AI DD (Direct Drive)",
+            "Steam Wash",
+            "Smart Diagnosis",
+            "6 Motion DD",
+            "Allergiene Cycle",
+            "Smart ThinQ App"
+        ],
+        specifications: {
+            "Capacity": "7 kg",
+            "Type": "Front Load",
+            "Energy Rating": "5 Star",
+            "Motor": "AI Direct Drive",
+            "Programs": "14 Wash Programs",
+            "Speed": "1400 RPM",
+            "Dimensions": "60 x 56 x 85 cm",
+            "Weight": "62 kg"
+        },
+        inStock: true,
+        discount: 16,
+        tags: ["ai", "steam", "direct-drive"],
+        warranty: "2 Years Product + 10 Years Motor"
+    },
+    {
+        id: 4,
+        name: "LG 1.5 Ton Dual Inverter Split AC",
+        price: 45990,
+        originalPrice: 52990,
+        category: "ac",
+        brand: "LG",
+        rating: 4.5,
+        reviews: 203,
+        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+        images: [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
+            "https://images.unsplash.com/photo-1591767177019-8c07dd36b465?w=600&h=400&fit=crop"
+        ],
+        description: "Experience superior cooling with Dual Inverter technology that adapts to cooling needs while saving energy and reducing noise.",
+        features: [
+            "Dual Inverter Compressor",
+            "Copper Condenser",
+            "4-Way Swing",
+            "Wi-Fi Control",
+            "Ocean Black Protection",
+            "Low Gas Detection"
+        ],
+        specifications: {
+            "Capacity": "1.5 Ton",
+            "Type": "Split AC",
+            "Energy Rating": "5 Star",
+            "Compressor": "Dual Inverter",
+            "Cooling": "5100W",
+            "Refrigerant": "R32",
+            "Noise Level": "38 dB",
+            "Room Size": "150-180 sq ft"
+        },
+        inStock: true,
+        discount: 13,
+        tags: ["dual-inverter", "wifi", "energy-efficient"],
+        warranty: "1 Year Product + 10 Years Compressor"
+    },
+    {
+        id: 5,
+        name: "LG 28L Convection Microwave Oven",
+        price: 15990,
+        originalPrice: 18990,
+        category: "microwave",
+        brand: "LG",
+        rating: 4.4,
+        reviews: 134,
+        image: "https://images.unsplash.com/photo-1574269910919-0a2ad7d7e0c0?w=400&h=300&fit=crop",
+        images: [
+            "https://images.unsplash.com/photo-1574269910919-0a2ad7d7e0c0?w=600&h=400&fit=crop",
+            "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&h=400&fit=crop"
+        ],
+        description: "Multi-functional cooking companion with convection technology for baking, grilling, reheating, and defrosting all in one appliance.",
         features: [
             "Convection Cooking",
             "Auto Cook Menus",
@@ -107,228 +246,7 @@ const testimonials = [
         name: "Priya Sharma",
         location: "Dombivli",
         rating: 5,
-        comment: "Amazing experience! Free delivery and installation was done professionally. The refrigerator is working perfectly."
-    }
-];
-
-// Page Navigation
-function showPage(pageName) {
-    currentPage = pageName;
-    const pages = ['home', 'shop', 'services', 'about', 'contact', 'cart'];
-    pages.forEach(page => {
-        const element = document.getElementById(page + 'Page');
-        if (element) {
-            element.style.display = page === pageName ? 'block' : 'none';
-        }
-    });
-
-    // Special handling for shop page
-    if (pageName === 'shop') {
-        displayProducts();
-    }
-
-    // Scroll to top
-    window.scrollTo(0, 0);
-}
-
-// Product Display Functions
-function displayProducts(category = null) {
-    const productContainer = document.getElementById('productGrid');
-    if (!productContainer) return;
-
-    const filteredProducts = category 
-        ? products.filter(p => p.category === category)
-        : products;
-
-    productContainer.innerHTML = filteredProducts.map(product => `
-        <div class="product-card" data-aos="fade-up">
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
-                ${product.discount ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
-            </div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <div class="product-price">
-                    <span class="current-price">₹${product.price.toLocaleString()}</span>
-                    ${product.originalPrice ? `<span class="original-price">₹${product.originalPrice.toLocaleString()}</span>` : ''}
-                </div>
-                <div class="product-rating">
-                    ${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5-Math.floor(product.rating))}
-                    <span class="review-count">(${product.reviews})</span>
-                </div>
-                <button class="btn btn-primary mt-2" onclick="addToCart(${product.id})">
-                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-                </button>
-            </div>
-        </div>
-    `).join('');
-
-    // Initialize AOS animations
-    AOS.refresh();
-}
-
-// Cart Functions
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    const existingItem = cart.find(item => item.id === productId);
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({ ...product, quantity: 1 });
-    }
-
-    // Save to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartBadge();
-    showToast('Product added to cart!');
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartBadge();
-    if (currentPage === 'cart') {
-        displayCart();
-    }
-}
-
-function updateQuantity(productId, delta) {
-    const item = cart.find(item => item.id === productId);
-    if (item) {
-        item.quantity = Math.max(1, item.quantity + delta);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartBadge();
-        if (currentPage === 'cart') {
-            displayCart();
-        }
-    }
-}
-
-function displayCart() {
-    const cartContainer = document.getElementById('cartItems');
-    if (!cartContainer) return;
-
-    if (cart.length === 0) {
-        cartContainer.innerHTML = `
-            <div class="empty-cart text-center py-5">
-                <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
-                <h3>Your cart is empty</h3>
-                <p class="text-muted">Start shopping to add items to your cart!</p>
-                <button class="btn btn-primary mt-3" onclick="showPage('shop')">
-                    Browse Products
-                </button>
-            </div>
-        `;
-        return;
-    }
-
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartContainer.innerHTML = `
-        <div class="cart-items">
-            ${cart.map(item => `
-                <div class="cart-item" data-aos="fade-right">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <div class="price">₹${item.price.toLocaleString()}</div>
-                        <div class="quantity-controls">
-                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                        </div>
-                    </div>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `).join('')}
-        </div>
-        <div class="cart-summary" data-aos="fade-up">
-            <h3>Cart Summary</h3>
-            <div class="summary-item">
-                <span>Subtotal:</span>
-                <span>₹${total.toLocaleString()}</span>
-            </div>
-            <button class="btn btn-primary w-100 mt-3" onclick="checkout()">
-                Proceed to Checkout
-            </button>
-        </div>
-    `;
-}
-
-// Filter Products
-function filterProducts(category) {
-    showPage('shop');
-    displayProducts(category);
-}
-
-// Search Products
-function searchProducts(query) {
-    const searchQuery = query.toLowerCase();
-    const filtered = products.filter(product => 
-        product.name.toLowerCase().includes(searchQuery) ||
-        product.description.toLowerCase().includes(searchQuery) ||
-        product.tags.some(tag => tag.toLowerCase().includes(searchQuery))
-    );
-    
-    showPage('shop');
-    displayProducts(filtered);
-}
-
-// Floating Menu Toggle
-function toggleMenu() {
-    const menu = document.getElementById('floatingMenu');
-    menu.classList.toggle('active');
-}
-
-// Toast Notification
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 300);
-    }, 3000);
-}
-
-// Initialize the website
-document.addEventListener('DOMContentLoaded', () => {
-    // Show home page by default
-    showPage('home');
-    
-    // Initialize cart badge
-    updateCartBadge();
-    
-    // Initialize AOS animations
-    AOS.init({
-        duration: 800,
-        offset: 100,
-        once: true
-    });
-
-    // Initialize search
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            if (e.target.value.length >= 2) {
-                searchProducts(e.target.value);
-            } else if (e.target.value.length === 0) {
-                displayProducts();
-            }
-        });
-    }
-});
+        comment: "Amazing experience! Free delivery and installation was done professionally. The refrigerator is working perfectly.",
         image: "https://images.unsplash.com/photo-1494790108755-2616b612b169?w=100&h=100&fit=crop",
         product: "LG Refrigerator"
     },
@@ -352,6 +270,14 @@ let currentSort = 'name';
 let currentView = 'grid';
 let currentPage = 1;
 let itemsPerPage = 9;
+
+// Initialize cart from localStorage or empty array
+function updateCartBadge() {
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+}
 
 // Application Initialization
 document.addEventListener('DOMContentLoaded', function() {
@@ -451,7 +377,7 @@ function debounce(func, wait) {
     };
 }
 
-// Navigation Functions
+// Page Navigation
 function showPage(pageId) {
     // Hide all pages
     document.querySelectorAll('.page-section').forEach(page => {
@@ -709,7 +635,10 @@ function clearFilters() {
     document.querySelectorAll('.filter-chip').forEach(chip => {
         chip.classList.remove('active');
     });
-    document.querySelector('.filter-chip[onclick="filterProducts(\'all\')"]').classList.add('active');
+    const allFilter = document.querySelector('.filter-chip[onclick="filterProducts(\'all\')"]');
+    if (allFilter) {
+        allFilter.classList.add('active');
+    }
     
     // Reset checkboxes
     document.querySelectorAll('.filter-section input[type="checkbox"]').forEach(checkbox => {
@@ -728,6 +657,273 @@ function clearFilters() {
     loadAllProducts();
 }
 
+// Cart Functions
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    // Save to localStorage
+    localStorage.setItem('jyotiElectronCart', JSON.stringify(cart));
+    updateCartBadge();
+    showToast('Product added to cart!');
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    localStorage.setItem('jyotiElectronCart', JSON.stringify(cart));
+    updateCartBadge();
+    loadCartItems();
+}
+
+function updateQuantity(productId, delta) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity = Math.max(1, item.quantity + delta);
+        localStorage.setItem('jyotiElectronCart', JSON.stringify(cart));
+        updateCartBadge();
+        loadCartItems();
+    }
+}
+
+function loadCartItems() {
+    const cartContainer = document.getElementById('cartItems');
+    if (!cartContainer) return;
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `
+            <div class="empty-cart text-center py-5">
+                <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+                <h3>Your cart is empty</h3>
+                <p class="text-muted">Start shopping to add items to your cart!</p>
+                <button class="btn btn-primary mt-3" onclick="showPage('shop')">
+                    Browse Products
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartContainer.innerHTML = `
+        <div class="cart-items">
+            ${cart.map(item => `
+                <div class="cart-item" data-aos="fade-right">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="price">₹${item.price.toLocaleString()}</div>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('')}
+        </div>
+        <div class="cart-summary" data-aos="fade-up">
+            <h3>Cart Summary</h3>
+            <div class="summary-item">
+                <span>Subtotal:</span>
+                <span>₹${total.toLocaleString()}</span>
+            </div>
+            <button class="btn btn-primary w-100 mt-3" onclick="checkout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    `;
+}
+
+// Wishlist Functions
+function toggleWishlist(productId) {
+    const existingIndex = wishlist.findIndex(item => item.id === productId);
+    
+    if (existingIndex > -1) {
+        wishlist.splice(existingIndex, 1);
+        showToast('Removed from wishlist');
+    } else {
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            wishlist.push(product);
+            showToast('Added to wishlist');
+        }
+    }
+    
+    localStorage.setItem('jyotiElectronWishlist', JSON.stringify(wishlist));
+    updateWishlistDisplay();
+}
+
+function updateWishlistDisplay() {
+    const wishlistCount = document.getElementById('wishlistCount');
+    if (wishlistCount) {
+        wishlistCount.textContent = wishlist.length;
+    }
+}
+
+function toggleCompare(productId) {
+    const existingIndex = compareList.findIndex(item => item.id === productId);
+    
+    if (existingIndex > -1) {
+        compareList.splice(existingIndex, 1);
+        showToast('Removed from compare');
+    } else {
+        if (compareList.length >= 3) {
+            showToast('Maximum 3 products can be compared');
+            return;
+        }
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            compareList.push(product);
+            showToast('Added to compare');
+        }
+    }
+    
+    localStorage.setItem('jyotiElectronCompare', JSON.stringify(compareList));
+}
+
+function updateCartDisplay() {
+    updateCartBadge();
+}
+
+function saveCartToStorage() {
+    localStorage.setItem('jyotiElectronCart', JSON.stringify(cart));
+    localStorage.setItem('jyotiElectronWishlist', JSON.stringify(wishlist));
+    localStorage.setItem('jyotiElectronCompare', JSON.stringify(compareList));
+}
+
+// Product Detail Functions
+function showProductDetail(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    showPage('product');
+    
+    // Store current images for gallery navigation
+    window.currentProductImages = product.images;
+    window.currentImageIndex = 0;
+    
+    // You would populate the product detail page here
+    // This is a placeholder - implement based on your HTML structure
+}
+
+function quickView(productId) {
+    // Quick view modal implementation
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    // Implement quick view modal
+    showToast('Quick view feature - implement modal');
+}
+
+function buyNow(productId) {
+    addToCart(productId);
+    showPage('cart');
+}
+
+// Testimonials Functions
+function loadTestimonials() {
+    const container = document.getElementById('testimonialsContainer');
+    if (!container) return;
+    
+    container.innerHTML = testimonials.map(testimonial => `
+        <div class="testimonial-card" data-aos="fade-up">
+            <div class="testimonial-content">
+                <div class="rating mb-2">
+                    ${generateStarRating(testimonial.rating)}
+                </div>
+                <p class="comment">"${testimonial.comment}"</p>
+                <div class="testimonial-author">
+                    <img src="${testimonial.image}" alt="${testimonial.name}">
+                    <div class="author-info">
+                        <h5>${testimonial.name}</h5>
+                        <span class="location">${testimonial.location}</span>
+                        <span class="product">${testimonial.product}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Utility Functions
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast show';
+    toast.innerHTML = `
+        <div class="toast-body">
+            ${message}
+        </div>
+    `;
+    
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('fade');
+        setTimeout(() => {
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}
+
+function updateProductCount(count) {
+    const productCount = document.getElementById('productCount');
+    if (productCount) {
+        productCount.textContent = `${count} products found`;
+    }
+}
+
+function createPagination(totalProducts) {
+    const paginationContainer = document.getElementById('pagination');
+    if (!paginationContainer) return;
+    
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+    
+    let paginationHTML = '';
+    
+    // Previous button
+    if (currentPage > 1) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage - 1})">Previous</button>`;
+    }
+    
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+            paginationHTML += `<button class="page-btn active">${i}</button>`;
+        } else {
+            paginationHTML += `<button class="page-btn" onclick="changePage(${i})">${i}</button>`;
+        }
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+        paginationHTML += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next</button>`;
+    }
+    
+    paginationContainer.innerHTML = paginationHTML;
+}
+
+function changePage(page) {
+    currentPage = page;
+    loadAllProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function updateActiveFilters() {
     const activeFiltersContainer = document.getElementById('activeFilters');
     if (!activeFiltersContainer) return;
@@ -741,429 +937,181 @@ function updateActiveFilters() {
         });
     }
     
-    // Add other active filters based on checkboxes, price range, etc.
+    // Add other active filters based on checkboxes
     const smartFeatures = document.getElementById('smartFeatures');
     if (smartFeatures && smartFeatures.checked) {
         activeFilters.push({
             label: 'Smart Features',
-            action: () => smartFeatures.checked = false
+            action: () => {
+                smartFeatures.checked = false;
+                loadAllProducts();
+            }
         });
     }
     
-    activeFiltersContainer.innerHTML = activeFilters.map(filter => 
-        `<span class="filter-tag" onclick="(${filter.action})(); loadAllProducts();">
+    const energyEfficient = document.getElementById('energyEfficient');
+    if (energyEfficient && energyEfficient.checked) {
+        activeFilters.push({
+            label: 'Energy Efficient',
+            action: () => {
+                energyEfficient.checked = false;
+                loadAllProducts();
+            }
+        });
+    }
+    
+    const inverterTech = document.getElementById('inverterTech');
+    if (inverterTech && inverterTech.checked) {
+        activeFilters.push({
+            label: 'Inverter Technology',
+            action: () => {
+                inverterTech.checked = false;
+                loadAllProducts();
+            }
+        });
+    }
+    
+    activeFiltersContainer.innerHTML = activeFilters.map((filter, index) => 
+        `<span class="filter-tag" onclick="activeFilters[${index}].action()">
             ${filter.label} <i class="fas fa-times ms-1"></i>
         </span>`
     ).join('');
+    
+    // Store for onclick access
+    window.activeFilters = activeFilters;
 }
 
-// Product Detail Functions
-function showProductDetail(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    const container = document.getElementById('productDetail');
-    if (!container) return;
+// Event Handler Functions
+function handleContactForm(event) {
+    event.preventDefault();
     
-    const isInWishlist = wishlist.some(item => item.id === product.id);
-    const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
-
-    container.innerHTML = `
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="product-gallery">
-                    <div class="gallery-main" id="mainImage" style="background-image: url('${product.images[0]}')">
-                        <div class="gallery-controls">
-                            <button class="gallery-btn" onclick="previousImage()"><i class="fas fa-chevron-left"></i></button>
-                            <button class="gallery-btn" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                        <div class="gallery-indicators">
-                            ${product.images.map((_, index) => 
-                                `<span class="indicator ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${product.images[index]}', ${index})"></span>`
-                            ).join('')}
-                        </div>
-                    </div>
-                    <div class="gallery-thumbs">
-                        ${product.images.map((img, index) => `
-                            <div class="thumb ${index === 0 ? 'active' : ''}" 
-                                 style="background-image: url('${img}')"
-                                 onclick="changeMainImage('${img}', ${index})"></div>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="product-info">
-                    <div class="product-badges mb-3">
-                        ${product.inStock ? '<span class="badge bg-success">In Stock</span>' : '<span class="badge bg-danger">Out of Stock</span>'}
-                        ${product.discount > 0 ? `<span class="badge bg-warning text-dark">${product.discount}% Off</span>` : ''}
-                    </div>
-                    
-                    <h1 class="product-title mb-3">${product.name}</h1>
-                    
-                    <div class="product-rating mb-3">
-                        ${generateStarRating(product.rating)}
-                        <span class="rating-text ms-2">${product.rating}/5 (${product.reviews} reviews)</span>
-                    </div>
-                    
-                    <div class="price-section mb-4">
-                        <div class="current-price h3 text-lg-red mb-2">₹${product.price.toLocaleString()}</div>
-                        ${product.originalPrice > product.price ? 
-                            `<div class="original-price text-muted text-decoration-line-through">₹${product.originalPrice.toLocaleString()}</div>
-                             <div class="savings text-success">You save ₹${(product.originalPrice - product.price).toLocaleString()}</div>` 
-                            : ''}
-                    </div>
-                    
-                    <p class="product-description mb-4">${product.description}</p>
-                    
-                    <div class="product-actions mb-4">
-                        <div class="row g-2">
-                            <div class="col-12">
-                                <button class="btn bg-lg-red text-white w-100 btn-lg rounded-custom" onclick="addToCart(${product.id})" ${!product.inStock ? 'disabled' : ''}>
-                                    <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn btn-outline-danger w-100 rounded-custom" onclick="buyNow(${product.id})" ${!product.inStock ? 'disabled' : ''}>
-                                    <i class="fas fa-bolt me-2"></i>Buy Now
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn btn-outline-secondary w-100 rounded-custom ${isInWishlist ? 'active' : ''}" onclick="toggleWishlist(${product.id})">
-                                    <i class="fas fa-heart me-2"></i>${isInWishlist ? 'Wishlisted' : 'Wishlist'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="product-features mb-4">
-                        <h5 class="mb-3">Key Features</h5>
-                        <div class="row g-3">
-                            ${product.features.map(feature => `
-                                <div class="col-md-6">
-                                    <div class="feature-item d-flex align-items-center">
-                                        <i class="fas fa-check-circle text-lg-red me-2"></i>
-                                        <span>${feature}</span>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="warranty-info bg-light p-3 rounded-custom">
-                        <h6 class="mb-2"><i class="fas fa-shield-alt text-lg-red me-2"></i>Warranty Information</h6>
-                        <p class="mb-0 small">${product.warranty}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Product Tabs -->
-        <div class="product-tabs mt-5">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#specifications">Specifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#reviews">Reviews</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#delivery">Delivery & Installation</a>
-                </li>
-            </ul>
-            
-            <div class="tab-content mt-3">
-                <div class="tab-pane fade show active" id="specifications">
-                    <div class="specifications-table">
-                        <table class="table table-striped">
-                            ${Object.entries(product.specifications).map(([key, value]) => `
-                                <tr>
-                                    <td class="fw-semibold">${key}</td>
-                                    <td>${value}</td>
-                                </tr>
-                            `).join('')}
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="tab-pane fade" id="reviews">
-                    <div class="reviews-section">
-                        <div class="reviews-summary mb-4">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="rating-overview text-center">
-                                        <div class="average-rating h2 text-lg-red">${product.rating}</div>
-                                        <div class="rating-stars">${generateStarRating(product.rating)}</div>
-                                        <div class="total-reviews text-muted">${product.reviews} reviews</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="rating-breakdown">
-                                        ${[5,4,3,2,1].map(star => {
-                                            const percentage = Math.random() * 60 + 20; // Demo data
-                                            return `
-                                                <div class="rating-bar d-flex align-items-center mb-2">
-                                                    <span class="rating-label">${star} star</span>
-                                                    <div class="progress flex-fill mx-3">
-                                                        <div class="progress-bar bg-warning" style="width: ${percentage}%"></div>
-                                                    </div>
-                                                    <span class="rating-count">${Math.floor(percentage)}%</span>
-                                                </div>
-                                            `;
-                                        }).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-list">
-                            ${generateSampleReviews(product.id)}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-pane fade" id="delivery">
-                    <div class="delivery-info">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="info-card">
-                                    <h5><i class="fas fa-shipping-fast text-lg-red me-2"></i>Free Delivery</h5>
-                                    <p>Free delivery available within Kalyan city limits. Same day delivery available for orders placed before 2 PM.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-card">
-                                    <h5><i class="fas fa-tools text-lg-red me-2"></i>Professional Installation</h5>
-                                    <p>Complimentary installation by certified technicians. Demo and orientation included with every purchase.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Related Products -->
-        ${relatedProducts.length > 0 ? `
-            <div class="related-products mt-5">
-                <h3 class="mb-4">Related Products</h3>
-                <div class="row g-4">
-                    ${relatedProducts.map(relatedProduct => createProductCard(relatedProduct)).join('')}
-                </div>
-            </div>
-        ` : ''}
-    `;
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
     
-    // Store current images for gallery navigation
-    window.currentProductImages = product.images;
-    window.currentImageIndex = 0;
+    // Here you would typically send the data to your server
+    console.log('Contact form submitted:', data);
+    showToast('Thank you for your message! We will get back to you soon.');
     
-    showPage('product');
+    event.target.reset();
 }
 
-function changeMainImage(imageSrc, index) {
-    const mainImage = document.getElementById('mainImage');
-    if (mainImage) {
-        mainImage.style.backgroundImage = `url('${imageSrc}')`;
+function handleNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+}
+
+function handleBackToTopVisibility() {
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        if (window.scrollY > 300) {
+            backToTop.style.display = 'block';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    }
+}
+
+function handleKeyboardShortcuts(event) {
+    // Implement keyboard shortcuts if needed
+    if (event.ctrlKey && event.key === 'k') {
+        event.preventDefault();
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.focus();
+        }
+    }
+}
+
+function initializeScrollEffects() {
+    // Implement scroll effects if needed
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        showToast('Your cart is empty');
+        return;
     }
     
-    // Update active states
-    document.querySelectorAll('.thumb').forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === index);
+    // Implement checkout process
+    showToast('Redirecting to checkout...');
+    // You would redirect to your checkout page here
+}
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize cart badge
+    updateCartBadge();
+    updateWishlistDisplay();
+    
+    // Show home page by default
+    showPage('home');
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', (event) => {
+        const page = event.state?.page || 'home';
+        showPage(page);
     });
     
-    document.querySelectorAll('.indicator').forEach((indicator, i) => {
-        indicator.classList.toggle('active', i === index);
-    });
-    
-    window.currentImageIndex = index;
-}
-
-function previousImage() {
-    if (!window.currentProductImages) return;
-    
-    window.currentImageIndex = window.currentImageIndex > 0 
-        ? window.currentImageIndex - 1 
-        : window.currentProductImages.length - 1;
-    
-    changeMainImage(window.currentProductImages[window.currentImageIndex], window.currentImageIndex);
-}
-
-function nextImage() {
-    if (!window.currentProductImages) return;
-    
-    window.currentImageIndex = window.currentImageIndex < window.currentProductImages.length - 1 
-        ? window.currentImageIndex + 1 
-        : 0;
-    
-    changeMainImage(window.currentProductImages[window.currentImageIndex], window.currentImageIndex);
-}
-
-function generateSampleReviews(productId) {
-    const sampleReviews = [
-        {
-            name: "Rohit M.",
-            rating: 5,
-            date: "2 weeks ago",
-            comment: "Excellent product! Exactly as described. The quality is outstanding and delivery was quick.",
-            helpful: 12
-        },
-        {
-            name: "Sneha P.",
-            rating: 4,
-            date: "1 month ago", 
-            comment: "Good value for money. Installation team was professional. Minor issue with remote but got resolved quickly.",
-            OLED Self-Lit Pixels",
-            "4K α9 Gen6 AI Processor",
-            "Dolby Vision IQ & Dolby Atmos",
-            "webOS 23 Smart Platform",
-            "NVIDIA G-SYNC Compatible",
-            "4 HDMI 2.1 Ports"
-        ],
-        specifications: {
-            "Screen Size": "55 inches",
-            "Resolution": "4K Ultra HD (3840 x 2160)",
-            "Display Type": "OLED",
-            "Smart TV": "webOS 23",
-            "HDR": "Dolby Vision IQ, HDR10 Pro",
-            "Audio": "40W, Dolby Atmos",
-            "Connectivity": "Wi-Fi, Bluetooth, 4x HDMI 2.1",
-            "Dimensions": "122.8 x 70.6 x 4.6 cm",
-            "Weight": "18.7 kg"
-        },
-        inStock: true,
-        discount: 19,
-        tags: ["smart", "4k", "oled", "gaming"],
-        warranty: "2 Years Comprehensive + 5 Years Panel"
-    },
-    {
-        id: 2,
-        name: "LG 260L Frost Free Double Door Refrigerator",
-        price: 28990,
-        originalPrice: 34990,
-        category: "refrigerator",
-        brand: "LG",
-        rating: 4.6,
-        reviews: 189,
-        image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=300&fit=crop",
-        images: [
-            "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&h=400&fit=crop",
-            "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop"
-        ],
-        description: "Smart inverter technology meets efficient cooling with LG's advanced refrigeration system. Keep your food fresh longer with optimal temperature control.",
-        features: [
-            "Smart Inverter Compressor",
-            "Multi Air Flow",
-            "Moist 'N' Fresh",
-            "Smart Diagnosis",
-            "Door Cooling+",
-            "Toughened Glass Shelves"
-        ],
-        specifications: {
-            "Capacity": "260 Liters",
-            "Type": "Frost Free Double Door",
-            "Energy Rating": "5 Star",
-            "Compressor": "Smart Inverter",
-            "Shelves": "Toughened Glass",
-            "Warranty": "10 Years on Compressor",
-            "Dimensions": "55.5 x 64.5 x 150 cm",
-            "Weight": "52 kg"
-        },
-        inStock: true,
-        discount: 17,
-        tags: ["energy-efficient", "smart", "frost-free"],
-        warranty: "2 Years Product + 10 Years Compressor"
-    },
-    {
-        id: 3,
-        name: "LG 7kg Front Load Washing Machine",
-        price: 35990,
-        originalPrice: 42990,
-        category: "washing-machine",
-        brand: "LG",
-        rating: 4.7,
-        reviews: 156,
-        image: "https://images.unsplash.com/photo-1558618047-fbd67c35803b?w=400&h=300&fit=crop",
-        images: [
-            "https://images.unsplash.com/photo-1558618047-fbd67c35803b?w=600&h=400&fit=crop",
-            "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=600&h=400&fit=crop"
-        ],
-        description: "Revolutionary washing technology with AI Direct Drive that delivers powerful performance while being gentle on your clothes.",
-        features: [
-            "AI DD (Direct Drive)",
-            "Steam Wash",
-            "Smart Diagnosis",
-            "6 Motion DD",
-            "Allergiene Cycle",
-            "Smart ThinQ App"
-        ],
-        specifications: {
-            "Capacity": "7 kg",
-            "Type": "Front Load",
-            "Energy Rating": "5 Star",
-            "Motor": "AI Direct Drive",
-            "Programs": "14 Wash Programs",
-            "Speed": "1400 RPM",
-            "Dimensions": "60 x 56 x 85 cm",
-            "Weight": "62 kg"
-        },
-        inStock: true,
-        discount: 16,
-        tags: ["ai", "steam", "direct-drive"],
-        warranty: "2 Years Product + 10 Years Motor"
-    },
-    {
-        id: 4,
-        name: "LG 1.5 Ton Dual Inverter Split AC",
-        price: 45990,
-        originalPrice: 52990,
-        category: "ac",
-        brand: "LG",
-        rating: 4.5,
-        reviews: 203,
-        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-        images: [
-            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
-            "https://images.unsplash.com/photo-1591767177019-8c07dd36b465?w=600&h=400&fit=crop"
-        ],
-        description: "Experience superior cooling with Dual Inverter technology that adapts to cooling needs while saving energy and reducing noise.",
-        features: [
-            "Dual Inverter Compressor",
-            "Copper Condenser",
-            "4-Way Swing",
-            "Wi-Fi Control",
-            "Ocean Black Protection",
-            "Low Gas Detection"
-        ],
-        specifications: {
-            "Capacity": "1.5 Ton",
-            "Type": "Split AC",
-            "Energy Rating": "5 Star",
-            "Compressor": "Dual Inverter",
-            "Cooling": "5100W",
-            "Refrigerant": "R32",
-            "Noise Level": "38 dB",
-            "Room Size": "150-180 sq ft"
-        },
-        inStock: true,
-        discount: 13,
-        tags: ["dual-inverter", "wifi", "energy-efficient"],
-        warranty: "1 Year Product + 10 Years Compressor"
-    },
-    {
-        id: 5,
-        name: "LG 28L Convection Microwave Oven",
-        price: 15990,
-        originalPrice: 18990,
-        category: "microwave",
-        brand: "LG",
-        rating: 4.4,
-        reviews: 134,
-        image: "https://images.unsplash.com/photo-1574269910919-0a2ad7d7e0c0?w=400&h=300&fit=crop",
-        images: [
-            "https://images.unsplash.com/photo-1574269910919-0a2ad7d7e0c0?w=600&h=400&fit=crop",
-            "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&h=400&fit=crop"
-        ],
-        description: "Multi-functional cooking companion with convection technology for baking, grilling, reheating, and defrosting all in one appliance.",
-        features: [
-            "
+    // Handle initial URL
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showPage(hash);
+    }
+});
